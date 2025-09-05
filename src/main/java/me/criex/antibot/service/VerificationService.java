@@ -37,12 +37,13 @@ public class VerificationService {
                 .build();
         player.createBossBar(bossBar);
 
-        verificationData.put(player.getUniqueId(), new VerificationData(originalCaptcha, bossBar.getBossBarId(), timeout));
+        VerificationData data = new VerificationData(originalCaptcha, bossBar.getBossBarId(), timeout);
+        verificationData.put(player.getUniqueId(), data);
 
         main.getFormService().showCaptchaForm(player, displayCaptcha);
         player.setImmobile(true);
 
-        main.getServer().getScheduler().scheduleRepeatingTask(main, new Task() {
+        data.setTaskId(main.getServer().getScheduler().scheduleRepeatingTask(main, new Task() {
             @Override
             public void onRun(int currentTick) {
                 VerificationData data = verificationData.get(player.getUniqueId());
@@ -60,13 +61,14 @@ public class VerificationService {
                     cancel();
                 }
             }
-        }, 20);
+        }, 20).getTaskId());
     }
 
     public void verifyCaptcha(Player player, String input) {
         VerificationData data = verificationData.get(player.getUniqueId());
         if (data == null) return;
 
+        main.getServer().getScheduler().cancelTask(data.getTaskId());
         String processedInput = CaptchaGenerator.convertInputToOriginal(input.trim());
         if (data.getCaptcha().equalsIgnoreCase(processedInput)) {
             player.removeBossBar(data.getBossBarId());
@@ -81,17 +83,32 @@ public class VerificationService {
         }
     }
 
+    public void cancelVerification(Player player) {
+        VerificationData data = verificationData.get(player.getUniqueId());
+        if (data == null) return;
+
+        main.getServer().getScheduler().cancelTask(data.getTaskId());
+        player.removeBossBar(data.getBossBarId());
+        verificationData.remove(player.getUniqueId());
+        player.setImmobile(false);
+    }
+
     @Getter
     @RequiredArgsConstructor
     public static class VerificationData {
         private final String captcha;
         private final long bossBarId;
         private int time;
+        private int taskId;
 
         public VerificationData(String captcha, long bossBarId, int time) {
             this.captcha = captcha;
             this.bossBarId = bossBarId;
             this.time = time;
+        }
+
+        public void setTaskId(int taskId) {
+            this.taskId = taskId;
         }
 
         public int decrementTime() {

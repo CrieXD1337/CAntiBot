@@ -23,6 +23,7 @@ public class FormListener implements Listener {
 
         if (event.getFormID() == main.getFormService().getCaptchaFormId()) {
             if (event.wasClosed()) {
+                main.getVerificationService().cancelVerification(event.getPlayer());
                 main.getVerificationService().startVerification(event.getPlayer());
                 return;
             }
