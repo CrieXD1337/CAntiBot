@@ -14,7 +14,7 @@ import me.criex.antibot.AntiBot;
 public class FormService {
 
     private final AntiBot main;
-    private static final int CAPTCHA_FORM_ID = 1001;
+    private static final int CAPTCHA_FORM_ID = 3592;
 
     public void showCaptchaForm(Player player, String captcha) {
         FormWindowCustom form = new FormWindowCustom(main.getConfig().getString("form-title"));
