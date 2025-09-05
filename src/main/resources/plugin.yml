@@ -1,0 +1,5 @@
+name: CAntiBot
+main: me.criex.antibot.AntiBot
+version: 1.0.0
+api: [1.1.0, 1.0.14]
+author: CrieXD1337

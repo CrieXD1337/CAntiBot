@@ -1,0 +1,9 @@
+captcha-length: 6
+timeout-seconds: 30
+form-title: "AntiBot Verification"
+form-content: "Enter the captcha below: §2{captcha}"
+form-placeholder: "Type the captcha here"
+kick-message-timeout: "Verification timeout expired!"
+kick-message-fail: "Incorrect captcha!"
+success-message: "Verification successful!"
+bossbar-title: "Time remaining: {seconds}s"
