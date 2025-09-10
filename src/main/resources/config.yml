@@ -4,6 +4,9 @@ captcha-length: 6
 # Time to enter captcha in seconds
 timeout-seconds: 30
 
+# Enable or disable automatic update checking
+auto-update: true
+
 # Forms
 form-title: "AntiBot Verification"
 form-content: "Enter the captcha below: §2{captcha}"

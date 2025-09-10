@@ -7,6 +7,7 @@ import me.criex.antibot.listener.FormListener;
 import me.criex.antibot.listener.PlayerListener;
 import me.criex.antibot.service.FormService;
 import me.criex.antibot.service.VerificationService;
+import me.criex.antibot.utils.UpdateChecker;
 
 import java.io.File;
 
@@ -29,6 +30,10 @@ public class AntiBot extends PluginBase {
         this.verificationService = new VerificationService(this);
         getServer().getPluginManager().registerEvents(new PlayerListener(this), this);
         getServer().getPluginManager().registerEvents(new FormListener(this), this);
+
+        if (config.getBoolean("auto-update", true)) {
+            new UpdateChecker(this).checkForUpdates();
+        }
 
         String version = this.getDescription().getVersion();
         getLogger().info("§b------§2CAnti§aBot v§2" + version + "§b------");
