@@ -1,10 +1,19 @@
+# Number of characters in captcha
 captcha-length: 6
+
+# Time to enter captcha in seconds
 timeout-seconds: 30
+
+# Forms
 form-title: "AntiBot Verification"
 form-content: "Enter the captcha below: §2{captcha}"
 form-placeholder: "Type the captcha here"
+
+# Kick messages
 kick-message-timeout: "Verification timeout expired!"
 kick-message-fail: "Incorrect captcha!"
+
+# other settings
 success-message: "Verification successful!"
 bossbar-title: "Time remaining: {seconds}s"
 no-access-to-do: "§cYou can't do it on captcha"

@@ -29,6 +29,11 @@ public class AntiBot extends PluginBase {
         this.verificationService = new VerificationService(this);
         getServer().getPluginManager().registerEvents(new PlayerListener(this), this);
         getServer().getPluginManager().registerEvents(new FormListener(this), this);
-        getLogger().info("AntiBotPlugin enabled!");
+
+        String version = this.getDescription().getVersion();
+        getLogger().info("§b------§2CAnti§aBot v§2" + version + "§b------");
+        getLogger().info("§bPlugin §3enabled§b!");
+        getLogger().info("§bDownload URL: §3https://github.com/CrieXD1337/releases/latest");
+        getLogger().info("§b---------------------------");
     }
 }
